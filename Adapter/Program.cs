@@ -9,6 +9,16 @@ namespace AdapterExample
             return "old system";
         }
     }
+
+    // НОВЕ: Ще одна система для адаптації (Американська система)
+    class AmericanElectricitySystem
+    {
+        public string MatchFlatSocket()
+        {
+            return "american system (flat pins)";
+        }
+    }
+
     // Широковикористовуваний інтерфейс нової системи (специфікація до квартири)
     interface INewElectricitySystem
     {
@@ -23,28 +33,40 @@ namespace AdapterExample
             return "new interface";
         }
     }
-    // Адаптер назовні виглядає як нові євророзетки, шляхом наслідування прийнятного у 
-    // системі інтерфейсу
+
+    // Адаптер для старої системи
     class Adapter : INewElectricitySystem
     {
-        // Але всередині він старий
         private readonly OldElectricitySystem _adaptee;
         public Adapter(OldElectricitySystem adaptee)
         {
             _adaptee = adaptee;
         }
 
-        // А тут відбувається вся магія: наш адаптер «перекладає»
-        // функціональність із нового стандарту на старий
         public string MatchWideSocket()
         {
-            // Якщо б була різниця 
-            // то тут ми б помістили трансформатор
             return _adaptee.MatchThinSocket();
         }
     }
 
-     class  ElectricityConsumer
+    // НОВЕ: Адаптер для американської системи
+    class AmericanAdapter : INewElectricitySystem
+    {
+        private readonly AmericanElectricitySystem _adaptee;
+
+        public AmericanAdapter(AmericanElectricitySystem adaptee)
+        {
+            _adaptee = adaptee;
+        }
+
+        public string MatchWideSocket()
+        {
+            // Адаптуємо виклик
+            return _adaptee.MatchFlatSocket();
+        }
+    }
+
+     class ElectricityConsumer
     {
         // Зарядний пристрій, який розуміє тільки нову систему
         public static void ChargeNotebook(INewElectricitySystem electricitySystem)
@@ -60,10 +82,18 @@ namespace AdapterExample
             // 1) Ми можемо користуватися новою системою без проблем
             var newElectricitySystem = new NewElectricitySystem();
             ElectricityConsumer.ChargeNotebook(newElectricitySystem);
+            
             // 2) Ми повинні адаптуватися до старої системи, використовуючи адаптер
             var oldElectricitySystem = new OldElectricitySystem();
             var adapter = new Adapter(oldElectricitySystem);
-            ElectricityConsumer.ChargeNotebook(adapter);            
+            ElectricityConsumer.ChargeNotebook(adapter);
+
+            // 3) НОВЕ: Адаптуємося до американської системи
+            Console.WriteLine("--- Connecting to American grid ---");
+            var americanSystem = new AmericanElectricitySystem();
+            var americanAdapter = new AmericanAdapter(americanSystem);
+            ElectricityConsumer.ChargeNotebook(americanAdapter);
+
             Console.ReadKey();
         }
     }

@@ -31,6 +31,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "vbanasevych"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/vbanasevych/oop_hw7_patterns.git",
+    "accountId": "e038c089-783b-4c2f-a100-3b39e01f9c08"
+  }
+}]]></component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="Toolset" />
   </component>
@@ -50,6 +62,7 @@
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "git-widget-placeholder": "master",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -371,7 +384,7 @@
       <updated>1763377124480</updated>
       <workItem from="1763377133988" duration="12000" />
       <workItem from="1763377273167" duration="613000" />
-      <workItem from="1763377961198" duration="1379000" />
+      <workItem from="1763377961198" duration="1746000" />
     </task>
     <servers />
   </component>
